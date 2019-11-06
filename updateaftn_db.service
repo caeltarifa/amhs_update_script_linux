@@ -1,0 +1,13 @@
+[Unit]
+Description=update aftn database daemon
+
+[Service]
+User=postgres
+Group=root
+WorkingDirectory=/home/cael/scripting/dataflp
+ExecStart=/usr/lib/postgresql/10/bin/psql -U postgres -d nuclear_db -f /home/cael/scripting/dataflp/updateflp.sql
+
+[Install]
+WantedBy=multi-user.target
+
+

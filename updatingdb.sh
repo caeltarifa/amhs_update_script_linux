@@ -13,7 +13,7 @@ awk -f ~/scripting/query/flp.awk $sqlflp > ~/scripting/dataflp/updateflp.sql
 echo "......base de datos actualizada!!!"
 
 systemctl start updateaftn_db.service
-systemctl status updateaftn_db.service
+#systemctl status updateaftn_db.service
 
 #rm ~/scripting/dataflp/updateflp.tmp ~/scripting/dataflp/updateflp.sql
 else
