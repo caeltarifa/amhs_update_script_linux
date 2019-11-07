@@ -19,11 +19,11 @@ estudiarmsj() {
 
 	# echo "tiene un plan de vuelo"
 	echo -e "$bloque" > planesvuelo.tmp
-	awk '!temp_array[$0]++' planesvuelo.tmp > planesvuelo2.tmp
+	awk '!temp_array[$0]++' planesvuelo.tmp > planesvuelo2.tmp #elimina lineas repetidas del bloque
 	sed -i '$ d' planesvuelo2.tmp
 
-	cat planesvuelo2.tmp >> ~/scripting/dataflp/planesvuelo$DATE #mueve en forma de bloque
-	registro=`cat planesvuelo2.tmp`
+	#cat planesvuelo2.tmp >> ~/scripting/dataflp/planesvuelo$DATE #mueve en forma de bloque
+	registro=`cat planesvuelo2.tmp` #convierte en linea al bloque
 	echo $registro >> ~/scripting/dataflp/planesvueloline$DATE
 
 	rm -r planesvuelo2.tmp planesvuelo.tmp
@@ -37,7 +37,7 @@ estudiarmsj() {
 	awk '!temp_array[$0]++' metar.tmp > metar2.tmp #archivo con solo un mensaje amhs
 	sed -i '$ d' metar2.tmp
 
-	cat metar2.tmp >> ~/scripting/datametar/metar$DATE
+	#cat metar2.tmp >> ~/scripting/datametar/metar$DATE
 	cadenametar=`cat metar2.tmp`
 	echo $cadenametar >> ~/scripting/datametar/metarline$DATE
 
@@ -52,7 +52,7 @@ estudiarmsj() {
 	awk '!temp_array[$0]++' speci.tmp > speci2.tmp
 	sed -i '$ d' speci2.tmp
 
-	cat speci2.tmp >> ~/scripting/dataspeci/speci$DATE
+	#cat speci2.tmp >> ~/scripting/dataspeci/speci$DATE
 	cadenaspeci=`cat speci2.tmp`
 	echo $cadenaspeci >> ~/scripting/dataspeci/speciline$DATE
 
@@ -67,7 +67,7 @@ estudiarmsj() {
 	awk '!temp_array[$0]++' taf.tmp > taf2.tmp
 	sed -i '$ d' taf2.tmp
 
-	cat taf2.tmp >> ~/scripting/dataflp/taf$DATE
+	#cat taf2.tmp >> ~/scripting/dataflp/taf$DATE
 	cadenataf=`cat taf2.tmp`
 	echo $cadenataf >> ~/scripting/datataf/tafline$DATE
 
@@ -82,7 +82,7 @@ estudiarmsj() {
 	awk '!temp_array[$0]++' notam.tmp > notam2.tmp
 	sed -i '$ d' notam2.tmp
 
-	cat notam2.tmp >> ~/scripting/datanotam/notam$DATE
+	#cat notam2.tmp >> ~/scripting/datanotam/notam$DATE
 	cadenanotam=`cat notam2.tmp`
 	echo $cadenanotam >> ~/scripting/datanotam/notamline$DATE
 
@@ -171,7 +171,7 @@ then
 rm -r archseparado
 fi
 
-touch archseparado
+echo "" > archseparado
 
 while read line
 do
@@ -193,7 +193,7 @@ if [ -f archbloques ];
 then
 rm -r archbloques
 fi
-touch archbloques
+echo "" > archbloques
 
 bloque=""
 while read line
@@ -271,7 +271,7 @@ fi
 if [ -f ~/scripting/datanotam/notamline$DATE.old ];
 then
  diff -wBa ~/scripting/datanotam/notamline$DATE ~/scripting/datanotam/notamline$DATE.old > ~/scripting/datanotam/updatenotam.sql
-	if [! -s ~/scripting/datanotam/updatenotam.sql ];
+	if [ ! -s ~/scripting/datanotam/updatenotam.sql ];
 		then
 		echo -e "\e[33m >>> NOTAM whithout changes \e[0m"
 		# sed -i '1 d' ~/scripting/datanotam/updatenotam.sql
