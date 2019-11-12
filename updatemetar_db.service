@@ -1,0 +1,11 @@
+[Unit]
+Description=update metar database daemon
+
+[Service]
+User=postgres
+Group=root
+WorkingDirectory=/home/cael/scripting/datametar
+ExecStart=/usr/lib/postgresql/10/bin/psql -U postgres -d nuclear_db -f /home/cael/scripting/datametar/updatemetar.sql
+
+[Install]
+WantedBy=multi-user.target

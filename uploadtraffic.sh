@@ -242,6 +242,12 @@ then
 	else
 		echo -e "\e[32m >>> METAR updating ... \e[0m"
 	fi
+else
+ touch vacio.txt #archivo para generar primera columna en el archivo updateflp.sql
+ diff -wBa ~/scripting/datametar/metarline$DATE ~/scripting/vacio.txt > ~/scripting/datametar/updatemetar.sql
+ echo -e "\e[32m >>> METAR inserting ... \e[0m"
+ rm vacio.txt
+
 fi
 
 if [ -f ~/scripting/datataf/tafline$DATE.old ];
