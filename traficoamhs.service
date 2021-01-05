@@ -1,0 +1,13 @@
+[Unit]
+Description=traficoamhs daemon for update database
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/scripting
+ExecStart=/bin/bash /root/scripting/uploadtraffic.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

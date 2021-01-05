@@ -1,0 +1,13 @@
+[Unit]
+Description=update aftn database daemon for NOTAM
+
+[Service]
+User=postgres
+Group=root
+WorkingDirectory=/root/scripting/datanotam
+ExecStart=/usr/lib/postgresql/10/bin/psql -U postgres -d upsilon_of_db -f /root/scripting/datanotam/updateNOTAM.sql
+
+[Install]
+WantedBy=multi-user.target
+
+

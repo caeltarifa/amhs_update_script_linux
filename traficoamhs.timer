@@ -1,0 +1,11 @@
+[Unit]
+Description=Ejecutar traficoamhs daemon cada 10 segundos
+
+[Timer]
+OnBootSec=30
+OnUnitActiveSec=55
+AccuracySec=100us
+Unit=traficoamhs.service
+
+[Install]
+WantedBy=timers.target
