@@ -5,7 +5,7 @@ RS="\n";FS=" "
 }
 
 {
-cmd="date +%d-%m-%Y";
+cmd="date +%m-%d-%Y";
 cmd | getline datum;
 close(cmd);
 #print $1 datum;

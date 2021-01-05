@@ -1,0 +1,40 @@
+import time
+
+DATE=time.strftime("%d%m%Y")
+print(DATE)
+addr="/root/scripting/datanotam/notamline24092020"#+DATE
+
+f=open(addr,"r")
+
+newf=open("/root/scripting/datanotam/updateNOTAM.sql","w") #ARCHIVO DE SALIDA
+
+linea=f.readline()
+
+while(True):
+
+	linea=f.readline()
+	print(linea)
+	if linea != "":
+		#print(">>",linea)
+		vector=linea.split("@CAELT@") # IDMENSAJE - AFTN1 - AFTN2 - NOTAM - MENSAJE -
+#							 id_mensaje,aftn1,aftn2,idnotam,resumen,aplica_a,valido_desde,valido_hasta,mensaje,nuevo
+		vector_mensaje=vector[3].split(';;')
+		vector.pop()
+		vector += vector_mensaje
+		vector.pop()
+		sql="insert into plan_vuelo_notam_trafico (id_mensaje,aftn1,aftn2,idnotam,resumen,aplica_a,valido_desde,valido_hasta,mensaje,nuevo,ingresado)"
+		
+		vectoror_ABC=vector[5].split(')')
+		A=vector_ABC[0strip()
+['ZPX0292 241301', 'GG SLZZYNYX', '241301 SLLPYNYX', '(C1850/20 NOTAMR C1390/20', 'Q) SLLF/QMXLC/IV/NBO/A/000/999/1914S06508W005', 'A) SLAL B) 2009241301 C) 2010252000 EST', 'E) TWY A CLSD MAINT)', '\n']
+		print(vector)
+		sql=sql+" values ('"+vector[0].replace(" ","") +"/"+ DATE + "','" + vector[1] + "','" +vector[2] + "','" + vector[3] + "','" + vector[4] + "','" + vector[5] + "','" + vector[6] + "','" + vector[7] + "','" + vector[8] +"','t',current_timestamp);"
+
+		newf.write(sql+"\n")
+	if not (linea):
+		break
+
+f.close()
+newf.close()
+
+#print(vector,sql)
